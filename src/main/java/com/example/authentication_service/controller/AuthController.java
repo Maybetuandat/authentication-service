@@ -5,7 +5,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +15,9 @@ import com.example.authentication_service.dto.LoginRequest;
 import com.example.authentication_service.dto.MessageResponse;
 import com.example.authentication_service.dto.RefreshTokenRequest;
 import com.example.authentication_service.dto.TokenRefreshResponse;
-import com.example.authentication_service.repository.UserRepository;
 import com.example.authentication_service.security.jwt.JwtUtils;
 import com.example.authentication_service.security.service.UserDetailsImpl;
 import com.example.authentication_service.security.service.UserDetailsServiceImpl;
-import com.example.authentication_service.service.RoleService;
 import com.nimbusds.jose.JOSEException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,12 +34,8 @@ import java.util.List;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
     private final UserDetailsServiceImpl userDetailsService;
-    private final RoleService roleService;
-
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
