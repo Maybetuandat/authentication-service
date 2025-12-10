@@ -24,24 +24,7 @@ public class UserService {
             throw new RuntimeException("Failed to fetch users", e);
         }
     }
-    public Page<User> getUsersByCourseId(Integer courseId, String search, Boolean isActive, Pageable pageable) {
-        try {
-            Page<User> usersInCourse = userRepository.findUsersByCourseId(courseId, search, isActive, pageable);
-            return usersInCourse;
-        } catch (Exception e) {
-            log.error("Error fetching users by course ID {}: {}", courseId, e.getMessage());
-            throw new RuntimeException("Failed to fetch users by course ID", e);
-        }
-    }
-      public Page<User> getUsersNotInCourse(Integer courseId,String search, Boolean isActive,  Pageable pageable) {
-        try {
-            Page<User> usersInCourse = userRepository.findUsersNotInCourseId(courseId, search, isActive, pageable);
-            return usersInCourse;
-        } catch (Exception e) {
-            log.error("Error fetching users by course ID {}: {}", courseId, e.getMessage());
-            throw new RuntimeException("Failed to fetch users by course ID", e);
-        }
-    }
+ 
     public User createUser(User user)
     {
        try {
