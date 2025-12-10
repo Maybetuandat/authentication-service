@@ -24,6 +24,8 @@ import com.example.authentication_service.service.RoleService;
 import com.nimbusds.jose.JOSEException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.security.core.Authentication;
 import java.text.ParseException;
 import java.util.List;
@@ -31,6 +33,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -54,6 +57,7 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
+        log.info("User {} logged in successfully", userDetails.getUsername());
         return ResponseEntity.ok(new JwtResponse(
                 accessToken,
                 refreshToken,
